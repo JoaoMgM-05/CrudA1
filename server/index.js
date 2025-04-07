@@ -82,6 +82,20 @@ app.put('/update', (req, res) => {
     );
 });
 
+// Ruta para eliminar un empleado
+app.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+
+    data_base.query('DELETE FROM empleados WHERE id = ?', id, (err, result) => {
+        if (err) {
+            console.error('Error al eliminar el usuario:', err);
+            res.status(500).send('Error al eliminar el usuario');
+        } else {
+            res.status(200).send('Usuario eliminado con éxito');
+        }
+    });
+});
+
 // Inicia el servidor
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
